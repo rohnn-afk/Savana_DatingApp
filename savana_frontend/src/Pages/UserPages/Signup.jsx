@@ -32,7 +32,7 @@ const Signup = () => {
     e.preventDefault()
     const success = validateForm()
 
-    if(success === true)   console.log(formData) , signup(formData)
+    if(success === true)   signup(formData)
   }
 
 

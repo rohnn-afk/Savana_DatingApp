@@ -30,15 +30,13 @@ export const io = new Server(server,{
 
 app.use(express.json())  
 app.use(cookieParser())
-app.use(
-    cors({
-      origin: (origin, callback) => {
-        if (!origin) return callback(null, "*")
-        callback(null, origin)
-      },
-      credentials: true, 
-    })
-  );
+
+app.use(cors({
+  origin: "https://savana-datingapp-frontend.onrender.com", // Allow only your frontend
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true, // Allow cookies if needed
+}));
+
 app.use(formData.parse()); 
 app.use(express.urlencoded({ extended: true }));
 
