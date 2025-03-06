@@ -9,7 +9,7 @@ const About = () => {
           <div className='h-[70vh] flex w-[85vw] mt-10'><ShuffleHero/></div>
           </div>
         <div className=' mt-[-20] w-full py-20 px-10 shadow-[0_12px_30px_rgba(0,0,0,0.9),0_-12px_30px_rgba(0,0,0,0.9)] bg-zinc-100/50 rounded-3xl  '>
-            <h1 className='funnel-sans-uniquifier text-gray-900 text-7xl mb-20 mr-20 leading-[3.7vw]'>
+            <h1 className='funnel-sans-uniquifier text-gray-900 text-6xl mb-20 mr-20 leading-[3.7vw]'>
               Our whole motive behind this project is to make it easy for people to meet the people that are right for them , we believe world is a small place with a lot of people, yet lonely . So, this is what we came up with.
               This is a premium society.</h1>
         <div className='w-full flex gap-1 border-t-[2px] pt-10 mt-25 border-rose-300'>
