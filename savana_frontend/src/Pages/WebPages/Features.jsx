@@ -28,9 +28,9 @@ const Featured = () => {
               <div
                 onMouseEnter={() => setHovering1(true)}
                 onMouseLeave={() => setHovering1(false)}
-                className="cardcontainer w-1/3 relative h-[51vh]  "
+                className="cardcontainer w-1/3 relative h-[52vh]  "
               >
-                <h1 className="absolute flex overflow-hidden left-full text-green-400 -translate-x-1/2 top-1/2 -translate-y-1/2 z-[900] text-9xl tracking-tighter funnel-sans-uniquifier leading-none">
+                <h1 className="absolute flex overflow-hidden left-full text-green-400 -translate-x-1/2 top-1/2 -translate-y-1/2 z-[900] text-5xl tracking-tighter funnel-sans-uniquifier leading-none">
                   {
                     //fyde
                     "VERIFIED".split("").map((item, index) => (
@@ -75,9 +75,9 @@ const Featured = () => {
               <div
                 onMouseEnter={() => setHovering2(true)}
                 onMouseLeave={() => setHovering2(false)}
-                className="cardcontainer relative w-1/3  h-[55vh] "
+                className="cardcontainer relative w-1/3  h-[52vh] "
               >
-                <h1 className="absolute flex overflow-hidden right-full text-green-400 translate-x-1/3 top-1/2 -translate-y-1/2 z-[900] text-9xl tracking-tighter funnel-sans-uniquifier leading-none">
+                <h1 className="absolute flex overflow-hidden right-full text-green-400 translate-x-1/3 top-1/2 -translate-y-1/2 z-[900] text-5xl tracking-tighter funnel-sans-uniquifier leading-none">
                   {
                     //VISe
                     "USERS".split("").map((item, index) => (
