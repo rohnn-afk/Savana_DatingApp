@@ -82,14 +82,14 @@ function App() {
 
   return  userpage ? 
   
-  (   <div data-theme={theme} className=" min-h-screen overflow-visible">
+  (   <div data-theme={theme} className="min-h-screen overflow-visible">
       {authuser ? <UserNavbar /> : null }
     
     <div className="z-[-20]">  
       <Routes>
-        <Route path="/" element={authuser ? <UserHome /> :  <Navigate to={'/login'} />} />
         <Route path="/signup" element={!authuser ? <Signup /> : <Navigate to="/" />} />
         <Route path="/login" element={!authuser ? <Login /> : <Navigate to="/" />} />
+        <Route path="/" element={authuser ? <UserHome /> :  <Navigate to={'/login'} />} />
         <Route path="/setting" element={authuser ? <Setting /> : <Navigate to="/login" /> } />
         <Route path="/profile" element={authuser ? <Profile /> : <Navigate to="/login" />} />
         <Route path="/chat" element={authuser? <Chat/> : <Navigate to="/login" />}/>
@@ -98,9 +98,6 @@ function App() {
         <Route path="/pictures" element={authuser? <Pictures/> : <Navigate to="/login" />}/>
         <Route path="/notifications" element={authuser? <Notifications/> : <Navigate to="/login" />}/>
         <Route path="/wall" element={authuser? <Wall/> : <Navigate to="/login" />}/>
-
-
-        {/* pink-900 */}
 
       </Routes>
     </div>

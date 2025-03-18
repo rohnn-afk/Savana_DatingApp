@@ -37,7 +37,7 @@ export const AnimatedTestimonials = ({
     return Math.floor(Math.random() * 21) - 10;
   };
   return (
-    (<div className="w-full md:max-w-6xl mx-auto antialiased font-sans px-4 mt-4 md:px-8 lg:px-12 py-20">
+    (<div className="w-full mt-16 md:max-w-6xl mx-auto antialiased font-sans px-4  md:px-8 lg:px-12 py-20">
       <div className="relative grid grid-cols-1 md:grid-cols-2  gap-[10vw]">
 
 
@@ -105,10 +105,10 @@ export const AnimatedTestimonials = ({
               duration: 0.2,
               ease: "easeInOut",
             }}>
-            <h3 className="text-4xl pb-3 font-bold  text-black">
+            <h3 className="text-4xl pb-3 hkfont font-bold  text-black">
               {testimonials[active]?.name}
             </h3>
-            <div className="p-1 py-2 flex flex-row gap-4">
+            <div className="p-1 hkfont py-2 flex flex-row gap-4">
             <p className="text-lg  text-gray-900 ">
               {testimonials[active]?.age}
             </p>
@@ -122,7 +122,7 @@ export const AnimatedTestimonials = ({
             </p>
             </div>
            
-            <div className="flex flex-row items-center gap-4 pt-6">
+            <div className="flex flex-row  items-center gap-4 pt-6">
 
                 <ArrowUpDown size={18}  />
                   <p className="text-md text-gray-700 ">{testimonials[active]?.height}

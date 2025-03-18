@@ -10,6 +10,7 @@ import MatchingRoutes from './Routes/MatchingRoutes.js'
 import ChatRoute from './Routes/ChatRoutes.js'
 import http from 'http'
 import { Server } from 'socket.io'
+import { NotificationModel } from './Models/NotificationModel.js'
 
 
 // {dot env}
@@ -18,24 +19,50 @@ const port = process.env.PORT
 
 
 
+
 // {express}
 const app = express()
 const server = new http.createServer(app)
 export const io = new Server(server,{
-  cors:{origin:'*'}}
+  cors: {
+    origin: ["https://savana-datingapp-frontend.onrender.com", "http://localhost:5173"],
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+}
 )
 
+const allowedOrigins = [
+  "https://savana-datingapp-frontend.onrender.com",
+  "http://localhost:5173", // Add your dev environment
+];
 
 
+// app.use(cors())
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true,
+}));
 
 app.use(express.json())  
 app.use(cookieParser())
 
-app.use(cors({
-  origin: "https://savana-datingapp-frontend.onrender.com", // Allow only your frontend
-  methods: "GET,POST,PUT,DELETE",
-  credentials: true, // Allow cookies if needed
-}));
+
+
+// app.use(cors({ 
+//   origin: "*", // Allows requests from any origin
+//   methods: "GET,POST,PUT,DELETE,PATCH",
+//   credentials: true, // Allows cookies and authentication headers
+//   allowedHeaders: ["Content-Type", "Authorization"]
+// }));
+
+// app.use(cors({
+//   origin: "https://savana-datingapp-frontend.onrender.com", // Allow only your frontend
+//   methods: "GET,POST,PUT,DELETE",
+//   credentials: true, // Allow cookies if needed
+// }));
 
 app.use(formData.parse()); 
 app.use(express.urlencoded({ extended: true }));
@@ -62,7 +89,7 @@ export const getUserSocketID = (userID) =>{
 
 const onlineUsers = {}
 
-io.on('connection',(socket)=>{
+io.on('connection',async (socket)=>{
   console.log('user is connected',socket.id)
 
   const userID = socket.handshake.query.userID
@@ -72,6 +99,20 @@ io.on('connection',(socket)=>{
   }
 
   io.emit('onlineUsers',Object.keys(onlineUsers))
+
+
+  const missedNotifications = await NotificationModel.find({recieverID:userID,isRead:false})
+
+  if(missedNotifications){
+    missedNotifications.forEach((notification) => {
+      
+      io.to(socket.id).emit('matchnotification',{message:notification.message,userID:senderID})
+
+    });
+
+    await NotificationModel.updateMany({ recieverID: userID, isRead: false }, { isRead: true })
+  }
+
 
   socket.on('disconnect',()=>{
   

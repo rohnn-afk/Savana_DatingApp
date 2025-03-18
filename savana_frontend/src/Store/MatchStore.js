@@ -10,6 +10,7 @@ export const MatchStore = create((set,get)=>({
     potentialMatch : null,
     messages:[],
     matches:[],
+    notifications:[],
     selecteduser:null,
     isMatchesLoading:false,
     isMessageLoading:false,
@@ -114,6 +115,10 @@ export const MatchStore = create((set,get)=>({
         const socket = UserAuthStore.getState().socket
 
         socket.off('newmessage')
+
+    },
+
+    subscribeToNotifications : ()=>{
 
     }
 }))

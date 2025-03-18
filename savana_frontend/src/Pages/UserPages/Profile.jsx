@@ -261,7 +261,7 @@ const Profile = () => {
   
   
   return  (
-    <div className="pb-20 h-[270vh] relative pt-10">
+    <div className="pb-20 h-[270vh]  relative pt-10">
        {deleteModal && (
         <div className="absolute top-0 left-0 w-full h-full z-[999] backdrop-blur-sm flex items-start pt-[50vh] justify-center">
           <motion.div
@@ -394,7 +394,7 @@ const Profile = () => {
           </h1>
          </div>
 
-        <div className="bg-base-300/30 rounded-xl p-6 space-y-8">
+        <div className="bg-base-300/30 newfont rounded-xl p-6 space-y-8">
         <div className="text-center items-center pb-6 justify-between flex flex-row">
              <div className='w-7'></div>
               <p className="mt-2">Your profile information</p>
@@ -403,7 +403,7 @@ const Profile = () => {
             </div>
           
 
-          <div className="space-y-6 w-full pb-12">
+          <div className="space-y-6 w-full  pb-12">
             <div className="space-y-7 w-full mt-2">
               <div className="text-md px-4 text-base-400  flex justify-between items-center gap-2">
             <div className='flex flex-row items-center gap-4'>

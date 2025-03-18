@@ -1,4 +1,5 @@
 import { uploadCloudImage } from "../Config/Cloudinary.js"
+import { NotificationModel } from "../Models/NotificationModel.js"
 import BioModel from "../Models/UserBio.js"
 import { ChatModel } from "../Models/UserChats.js"
 import ImagesModel from "../Models/UserImages.js"
@@ -35,9 +36,61 @@ export const likeUser = async (req,res)=>{
         likeduser.matches.push(user._id)
         await user.save()
         await likeduser.save()
+        
+        const recieverSocketID = await getUserSocketID(likeduserID)
+        const senderSocketID = await getUserSocketID(userID)
+        
+        if(recieverSocketID){
+            io.to(recieverSocketID).emit('matchnotification',{message:'its a match',likeduserID})
+        }else{
+            const res = new NotificationModel({
+                    senderID:userID,
+                    recieverID:likeduserID,
+                    type:'MATCH',
+                    message:'You got a Match!',
+                    timestamp: new Date()
+            })
+
+            await res.save()
+
+        }
+
+        if(senderSocketID){
+            io.to(senderSocketID).emit('matchnotification',{message:'its a match',likeduserID})
+        }else{
+            const res = new NotificationModel({
+                    senderID:likeduserID,
+                    recieverID:userID,
+                    type:'MATCH',
+                    message:'You got a Match!',
+                    timestamp: new Date()
+            })
+
+            await res.save()
+
+        }
+       
         return res.status(202).json({success:true,match:true,message:"users are a match"})
+    }
+
+    //notification for like
+
+    if(recieverSocketID){
+        io.to(recieverSocketID).emit('matchnotification',{message:'Someone liked you',userID})
+    }else{
+        const res = new NotificationModel({
+                senderID:userID,
+                recieverID:likeduserID,
+                type:'LIKE',
+                message:'You got a Like!',
+                timestamp: new Date()
+        })
+
+        await res.save()
 
     }
+
+
 
     return res.status(202).json({success:true,match:false,message:"users have been added to liked"})
 

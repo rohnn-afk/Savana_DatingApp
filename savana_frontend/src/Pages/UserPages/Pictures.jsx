@@ -188,7 +188,7 @@ const Pictures = () => {
                { image1 ? (<img className="w-10 h-10 object-cover rounded-3xl" src={URL.createObjectURL(image1)}/>) : 
                (
                   (userImages.image1?.image && <img className="w-10 h-10 object-cover rounded-3xl" src={userImages.image1?.image}/>) || <Camera className="w-5 h-5 m-2" />
-              )}
+               )}
                 <input
                   type="file"
                   id="image1"

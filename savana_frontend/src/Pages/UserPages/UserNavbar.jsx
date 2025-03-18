@@ -15,31 +15,29 @@ const UserNavbar = () => {
 
   return (
     <div className='relative z-[900] '>
-<div className="px-8 flex items-center justify-between  backdrop-blur-xl ">
-  <div className="">
-  <h1 className="text-red-400 subpixel-antialiased text-3xl prata-regular outfit-uniquifier tracking-widest">
+<div className="px-8 py-0.5 flex items-center justify-between  backdrop-blur-xl ">
+  <Link to={'/'} className="">
+  <h1 className=" text-[#ff3e98] mt-3 subpixel-antialiased text-3xl prata-regular outfit-uniquifier tracking-widest">
                     SAVANA
                 </h1>
-  </div>
+  </Link>
   <div className="flex w-full py-0 my-0 justify-between items-center">
-  <div className="flex w-full ">
-    <ul className="flex  justify-between  text-lg mx-24 ml-96">
-      <Link className='mx-12 hover:bg-base-300 px-4 py-2  rounded-md' to={'/'}><li><a>Home</a></li></Link>
-      <Link className='mx-12 hover:bg-base-300 px-4 py-2  rounded-md' to={'/wall'}><li><a>Wall</a></li></Link>
-      <Link className='mx-12 hover:bg-base-300 px-4 py-2  rounded-md' to={'/chat'}><li className='indicator'><a>Matches<span className="badge badge-lg zain-regular indicator-item">{matches?.length}</span></a></li></Link>
-      <Link className='mx-12 hover:bg-base-300 px-4 py-2  rounded-md' to={'/notifications'}><li className='indicator'><a>Notifications
-      <span className="badge badge-lg zain-regular indicator-item">9</span></a></li></Link>
-
-      
+  <div className="flex w-full justify-end ">
+    <ul className="flex  justify-between  text-lg ">
+      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  rounded-md' to={'/'}><li><a>Home</a></li></Link>
+      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  rounded-md' to={'/wall'}><li><a>Wall</a></li></Link>
+      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  rounded-md' to={'/chat'}><li className='indicator'><a>Matches :<span className="zain-regular mx-1  backdrop-blur-md px-2 pt-0.5 rounded-xl">{matches?.length}</span></a></li></Link>
+      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  rounded-md' to={'/notifications'}><li className='indicator'><a>Notifications :
+      <span className="zain-regular mx-1 backdrop-blur-md px-1 pt-0.5 r">7</span></a></li></Link>
 
      
     </ul>
   </div>
 
 
-    <div className="dropdown dropdown-end pt-1">
+    <div className="dropdown dropdown-end ">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-        <div className="w-11 rounded-full">
+        <div className="w-9 rounded-full">
           <img
             alt=""
             src={ userData?.userimage || "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"} />
@@ -61,18 +59,7 @@ const UserNavbar = () => {
     </div>
   </div>
 </div>
-<motion.div
-  className="h-0.5 bg-zinc-100 rounded-full origin-left"
-  initial={{ scaleX: 0, rotate: -10 }}
-  animate={{ scaleX: 1, rotate: 0 }}
-  transition={{ duration: 3, ease: [0.6, 0.05, -0.01, 0.9]}}
-/>
-<motion.div
-      className="h-0.5 bg-zinc-900 rounded-full origin-left"
-      initial={{ scaleX: 0, rotate: -10 }}
-      animate={{ scaleX: 1, rotate: 0 }}
-      transition={{ duration: 3, ease: [0.6, 0.05, -0.01, 0.9]}}
-    />
+
 
 
 
