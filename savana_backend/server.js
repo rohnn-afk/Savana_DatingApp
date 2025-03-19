@@ -22,11 +22,11 @@ const port = process.env.PORT
 
 // {express}
 const app = express()
-const server = new http.createServer(app)
+const server =  http.createServer(app)
 export const io = new Server(server,{
   cors: {
     origin: ["https://savana-datingapp-frontend.onrender.com", "http://localhost:5173"],
-    methods: ["GET", "POST"],
+    methods:  ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true
   }
 }
