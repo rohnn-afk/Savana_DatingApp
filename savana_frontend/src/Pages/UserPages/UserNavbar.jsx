@@ -23,7 +23,7 @@ const UserNavbar = () => {
   </Link>
   <div className="flex w-full py-0 my-0 justify-between items-center">
   <div className="flex w-full justify-end ">
-    <ul className="flex  justify-between  text-base ">
+    <ul className="flex  justify-between  text-sm ">
       <Link className='mx-12 hover:bg-base-300 px-4 pt-1  rounded-md' to={'/'}><li><a>Home</a></li></Link>
       <Link className='mx-12 hover:bg-base-300 px-4 pt-1  rounded-md' to={'/wall'}><li><a>Wall</a></li></Link>
       <Link className='mx-12 hover:bg-base-300 px-4 pt-1  rounded-md' to={'/chat'}><li className='indicator'><a>Matches :<span className="zain-regular mx-1  backdrop-blur-md px-2 pt-0.5 rounded-xl">{matches?.length}</span></a></li></Link>
