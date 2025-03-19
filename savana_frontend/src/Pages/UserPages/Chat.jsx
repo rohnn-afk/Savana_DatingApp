@@ -20,7 +20,7 @@ const Chat = () => {
   return (
     <div className="h-screen bg-base-300 mt-1 w-full fixed">
       <div className="flex items-center justify-center ">
-        <div className="bg-base-100 rounded-lg shadow-cl w-full max-w-8xl h-[calc(107vh-8rem)]">
+        <div className="bg-base-100 rounded-lg shadow-cl w-full max-w-8xl h-full">
           <div className="flex h-full w-full rounded-lg overflow-hidden">
             <Sidebar />
 
