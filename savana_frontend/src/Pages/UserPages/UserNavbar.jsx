@@ -24,10 +24,10 @@ const UserNavbar = () => {
   <div className="flex w-full py-0 my-0 justify-between items-center">
   <div className="flex w-full justify-end ">
     <ul className="flex  justify-between  text-sm ">
-      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  rounded-md' to={'/'}><li><a>Home</a></li></Link>
-      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  rounded-md' to={'/wall'}><li><a>Wall</a></li></Link>
-      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  rounded-md' to={'/chat'}><li className='indicator'><a>Matches :<span className="zain-regular mx-1  backdrop-blur-md px-2 pt-0.5 rounded-xl">{matches?.length}</span></a></li></Link>
-      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  rounded-md' to={'/notifications'}><li className='indicator'><a>Notifications :
+      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  ' to={'/'}><li><a>Home</a></li></Link>
+      <Link className='mx-12 hover:bg-base-300 px-4 pt-1 ' to={'/wall'}><li><a>Wall</a></li></Link>
+      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  ' to={'/chat'}><li className='indicator'><a>Matches :<span className="zain-regular mx-1  backdrop-blur-md px-2 pt-0.5 rounded-xl">{matches?.length}</span></a></li></Link>
+      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  ' to={'/notifications'}><li className='indicator'><a>Notifications :
       <span className="zain-regular mx-1 backdrop-blur-md px-1 pt-0.5 r">7</span></a></li></Link>
 
      

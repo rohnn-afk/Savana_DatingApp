@@ -4,7 +4,8 @@ import { MatchStore } from "../../../Store/MatchStore";
 
 
 const ChatHeader = () => {
-  const { selecteduser, setSelecteduser } = MatchStore();
+  const { selecteduser, setSelecteduser, unMatch } = MatchStore();
+
 
   return (
     <div className="p-2.5 border-b border-base-300 bg-base-100">
@@ -19,14 +20,14 @@ const ChatHeader = () => {
 
           {/* User info */}
           <div className="">
-            <h3 className="text-3xl font-semibold leckerli-one-regular leading-none ">{selecteduser?.name}</h3>
+            <h3 className="text-3xl font-semibold capitalize  leading-none ">{selecteduser?.name}</h3>
           </div>
         </button>
 
 <div className="flex flex-row items-center gap-x-8 mx-6">
 
 
-        <button className="hover:text-red-600" onClick={() => setSelecteduser(null)}>
+        <button className="hover:text-red-600" onClick={() => unMatch(selecteduser._id)}>
           unmatch
         </button>
 

@@ -45,9 +45,6 @@ const MessageInput = () => {
      text ? formData.append('text',text.trim()) : null
      imagePreview ? formData.append('image',selectedFile) : null
 
-     for (let [key, value] of formData.entries()) {
-        console.log(key, value);
-      }
 
       await sendMessages(formData);
 
@@ -63,7 +60,7 @@ const MessageInput = () => {
   };
 
   return (
-    <div className="p-4 w-[79vw]">
+    <div className="p-4 mb-5 ml-4 w-[80vw]">
       {imagePreview && (
         <div className="mb-3 flex items-center gap-2">
           <div className="relative">

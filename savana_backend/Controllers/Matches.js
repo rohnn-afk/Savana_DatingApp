@@ -24,6 +24,8 @@ export const likeUser = async (req,res)=>{
         return res.status(404).json({success:false,message:"users not found"})
     }
 
+    const recieverSocketID = await getUserSocketID(likeduserID)
+    const senderSocketID = await getUserSocketID(userID)
 
 
     if(!user.likes.includes(likeduserID)){
@@ -37,11 +39,10 @@ export const likeUser = async (req,res)=>{
         await user.save()
         await likeduser.save()
         
-        const recieverSocketID = await getUserSocketID(likeduserID)
-        const senderSocketID = await getUserSocketID(userID)
+       
         
         if(recieverSocketID){
-            io.to(recieverSocketID).emit('matchnotification',{message:'its a match',likeduserID})
+            io.to(recieverSocketID).emit('matchnotification',{message:'its a match',userID})
         }else{
             const res = new NotificationModel({
                     senderID:userID,
@@ -208,21 +209,23 @@ export const unmatch = async (req, res) => {
     try {
        
         const userID =  req.user._id.toString()
-        const  matchId  = req.body
+        const  {matchId}  = req.body
+
 
         if (!userID || !matchId) {
             return res.status(400).json({ message: "User ID and Match ID are required" });
         }
 
-        const user = await ProfileModel.findOne({ userID });
-        const matchedUser = await ProfileModel.findOne({ userId: matchId });
+        const user = await BioModel.findOne({ userID });
+        const matchedUser = await BioModel.findOne({ _id: matchId });
+
 
         if (!user || !matchedUser) {
             return res.status(404).json({ message: "User not found" });
         }
 
         user.matches = user.matches.filter(id => id.toString() !== matchId);
-        matchedUser.matches = matchedUser.matches.filter(id => id.toString() !== userID);
+        matchedUser.matches = matchedUser.matches.filter(id => id.toString() !== user._id.toString());
 
         await user.save();
         await matchedUser.save();

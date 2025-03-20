@@ -31,7 +31,6 @@ export const MatchStore = create((set,get)=>({
     },
     likePotentialMatch: async (data)=>{
 
-        console.log(data,get().potentialMatch)
         try {
 
             const res = await axiosInstance.post('/match/like',{likeduserID:data?._id})
@@ -63,6 +62,26 @@ export const MatchStore = create((set,get)=>({
         set({isMatchesLoading:false})
         }
     },
+    unMatch: async (id)=>{
+
+        try {
+            const res = await axiosInstance.post('/match/unmatch',{matchId:id})
+            if(res.data.success){
+                toast.success('Match Removed')
+                get().setSelecteduser(null)
+                get().getMatches()
+            }
+
+            
+        } catch (error) {
+            console.log(error)
+            toast.error('couldnt Un-Match at the moment')
+        }
+
+
+    },
+
+
     setSelecteduser : (user)=> set({selecteduser:user})
     ,
     fetchMessages: async (data)=>{
