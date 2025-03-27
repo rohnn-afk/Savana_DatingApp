@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MatchStore } from '../Store/MatchStore';
 import ChatHeader from './UI/Skeletons/ChatHeader';
 import MessageSkeleton from './UI/Skeletons/MessageSkeleton';
@@ -9,92 +9,83 @@ import { formatMessageTime } from '../lib/utils';
 const ChatContainer = () => {
   const { fetchMessages, selecteduser, messages, isMessageLoading, subscribeToMessages, unsubscribeToMessages } = MatchStore();
   const { userData } = ProfileStore();
-
   const messageEndRef = useRef(null);
+  const [selectedImage, setSelectedImage] = useState(null); // Store selected image for modal
 
   useEffect(() => {
     if (messageEndRef.current && messages.length > 0) {
       setTimeout(() => {
-        messageEndRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
-      }, 100); // Ensures DOM updates first
+        messageEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     }
   }, [messages]);
 
-  useEffect(() => {  
+  useEffect(() => {
     if (selecteduser?.userID) {
       fetchMessages(selecteduser.userID);
       subscribeToMessages();
     }
-    
     return () => unsubscribeToMessages();
   }, [selecteduser?.userID]);
 
-  if (isMessageLoading) return (
-    <div className="flex-1 flex flex-col overflow-hidden">
-      <ChatHeader />
-      <MessageSkeleton />
-      <MessageInput />
-    </div>
-  );
+  if (isMessageLoading) {
+    return (
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <ChatHeader />
+        <MessageSkeleton />
+        <MessageInput />
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 flex flex-col overflow-hidden">
       <ChatHeader />
       
-      {/* Scrollable Chat Container */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 overscroll-contain touch-pan-y scroll-smooth"
+      <div className="flex-1 overflow-y-auto space-y-4 p-4 scroll-smooth"
         style={{ WebkitOverflowScrolling: "touch" }}>
         {messages?.map((message) => (
           <div key={message?._id} 
-            className={`chat px-4 ${message?.senderID === userData?.userID ? "chat-end" : "chat-start"}`} 
-            ref={messageEndRef}
+            className={`flex chat  ${message?.senderID === userData?.userID ? 'justify-end ' : 'justify-start'}`}
           >
-            {/* User Avatar */}
-            <div className="chat-image avatar">
-              <div className="size-10 rounded-full border-none">
-                <img
-                  src={message?.senderID === userData?.userID
-                    ? userData?.userimage || "/avatar.png"
-                    : selecteduser?.userimage || "/avatar.png"}
-                  alt="profile pic"
-                />
+            <div className="flex items-end gap-2">
+              {message?.senderID !== userData?.userID && (
+                <time className="text-xs opacity-90 text-left">
+                  {formatMessageTime(message?.createdAt)}
+                </time>
+              )}
+              <div className={`relative max-w-xs md:max-w-md lg:max-w-lg p-4 rounded-lg shadow-[0_8px_12px_rgba(0,0,0,0.9)] ${message?.senderID === userData?.userID ? 'chat-bubble-primary chat-bubble' : 'chat-bubble'}`}>
+                {message?.image && (
+                  <img
+                    src={message?.image}
+                    alt="Attachment"
+                    className="max-w-[250px] rounded-md mb-2 cursor-pointer"
+                    onClick={() => setSelectedImage(message?.image)} // Open modal on click
+                  />
+                )}
+                {message?.message && <p className='break-words px-2'>{message?.message}</p>}
               </div>
+              {message?.senderID === userData?.userID && (
+                <time className="text-xs opacity-90 text-right">
+                  {formatMessageTime(message?.createdAt)}
+                </time>
+              )}
             </div>
-
-            {/* Message Bubble */}
-            {message?.senderID === userData?.userID ? 
-            ( <div className="chat-bubble-primary chat-bubble flex px-2 flex-col">
-              {message?.image && (
-                <img
-                  src={message?.image}
-                  alt="Attachment"
-                  className="sm:max-w-[200px] rounded-md mb-2"
-                />
-              )}
-              {message?.message && <p className='px-2'>{message?.message}</p>}
-            </div> )
-             : 
-             ( <div className=" chat-bubble flex px-2 flex-col">
-              {message?.image && (
-                <img
-                  src={message?.image}
-                  alt="Attachment"
-                  className="sm:max-w-[200px] rounded-md mb-2"
-                />
-              )}
-              {message?.message && <p className='px-2'>{message?.message}</p>}
-            </div> ) }
-            
-            <time className="text-xs opacity-50 ml-1">
-              {formatMessageTime(message?.createdAt)}
-            </time>
           </div>
         ))}
+        <div ref={messageEndRef}></div>
       </div>
-
+      
       <MessageInput />
+
+      {/* Image Preview Modal */}
+      {selectedImage && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50" onClick={() => setSelectedImage(null)}>
+          <img src={selectedImage} alt="Preview" className="max-w-full max-h-full rounded-lg" />
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default ChatContainer;

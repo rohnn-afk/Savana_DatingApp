@@ -21,8 +21,8 @@ const Sidebar = () => {
     if(isMatchesLoading) return <SidebarSkeleton/>
 
   return (
-    <aside className="h-[70vh] w-20 lg:w-72 border-r border-base-300 flex flex-col transition-all duration-200">
-      <div className="border-b border-base-300 w-full bg-base-200  p-3">
+    <aside className="h-[70vh] w-20 lg:w-72 border-r-4 border-base-300 flex flex-col transition-all duration-200">
+      <div className="border-b-4 border-base-300 w-full bg-base-200  p-3">
         <div className="flex items-center gap-2">
           <Users className="size-6" />
           <span className="font-medium hidden lg:block">Matches</span>
@@ -69,7 +69,7 @@ const Sidebar = () => {
 
             {/* User info - only visible on larger screens */}
             <div className="hidden lg:block text-left min-w-0">
-              <div className="font-medium newfont truncate">{user?.name}</div>
+              <div className="font-medium truncate">{user?.name}</div>
               <div className="text-sm text-zinc-400">
                 {onlineUsers?.includes(user?.userID) ? "Online" : "Offline"}
               </div>

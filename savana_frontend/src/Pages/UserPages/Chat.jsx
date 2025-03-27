@@ -3,16 +3,22 @@ import Sidebar from "../../Componentes/Sidebar"
 import { MatchStore } from "../../Store/MatchStore"
 import NoChatSelected from "../../Componentes/UI/Skeletons/NoChatSelected"
 import ChatContainer from "../../Componentes/ChatContainer"
+import POV from "./POV"
+import { UIStore } from "../../Store/UIStore"
+import MatchProfileData from "../../Componentes/MatchProfileData"
 
 const Chat = () => {
 
    const {getMatches,selecteduser} = MatchStore()
+   const {showMatchDetailsCard} = UIStore()
 
      useEffect(() => {
   
               getMatches()
 
      }, [getMatches])
+
+     
 
 
 
@@ -23,6 +29,8 @@ const Chat = () => {
         <div className="bg-base-100 rounded-lg shadow-cl w-full max-w-8xl h-[calc(107vh-7rem)]">
           <div className="flex h-full w-full rounded-lg overflow-hidden">
             <Sidebar />
+
+            {showMatchDetailsCard && <MatchProfileData/>}
 
             {!selecteduser ? <NoChatSelected /> : <ChatContainer />}
           </div>

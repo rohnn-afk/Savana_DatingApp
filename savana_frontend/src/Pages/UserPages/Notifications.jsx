@@ -1,7 +1,20 @@
-import Marquee from "../../Componentes/Marquee"
+import { useEffect } from "react"
 import { BackgroundGradientAnimation } from "../../Componentes/UI/RGBbackground"
+import { NotificationStore } from "../../Store/NotificationStore"
 
 const Notifications = () => {
+
+
+  const {notifications,isNotificationLoading,unReadCount,markReadNotification} = NotificationStore()
+
+  useEffect(() => {
+    markReadNotification()
+
+  }, [markReadNotification])
+  
+
+  console.log(notifications,isNotificationLoading,unReadCount)
+
   return (
     <div className="min-h-screen bg-slate-100/10">
     <BackgroundGradientAnimation>

@@ -52,6 +52,33 @@ export const UIStore = create((set,get)=>({
             console.log(error)
         }
 
-    }
+    },
+    showMatchDetailsCard : false,
+    setShowMatchDetailsCard : ()=>{set({showMatchDetailsCard:!get().showMatchDetailsCard})},
+    MatchDetailsCardImages : null,
+    getMatchDetailsCardImages : async (data)=>{
+
+        try {
+            const res = await axiosInstance.post('/match/getpotentialmatchimages',{data})
+            if(res.data.success){
+                set({MatchDetailsCardImages:res.data.images})
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    },
+    showConfetti:false,
+    setShowConfettitrue: ()=>{
+        set({showConfetti:true})
+        setTimeout(() => {set({showConfetti:false}) }, 6000);
+    },
+    showHearts:false,
+    setShowHeartstrue: ()=>{
+        set({showHearts:true})
+        setTimeout(() => {set({showHearts:false}) }, 6000);
+    },
+  
+  
+
 
 }))

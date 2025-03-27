@@ -1,21 +1,24 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { UserAuthStore } from '../../Store/UserAuth'
 import { ProfileStore } from '../../Store/ProfileStore'
 import { motion } from "framer-motion"
 import { MatchStore } from '../../Store/MatchStore'
+import { NotificationStore } from '../../Store/NotificationStore'
+
 
 const UserNavbar = () => {
 
     const {matches} = MatchStore()
-  
-
     const {userData} = ProfileStore()
     const {logout} = UserAuthStore()
+    const {unReadCount} = NotificationStore()
+
+    const location = useLocation()
 
 
   return (
     <div className='relative z-[900] '>
-<div className="px-8 py-0.5 flex items-center justify-between  backdrop-blur-xl ">
+<div className={` ${location.pathname == '/notifications' ? ('bg-base-100/50') : ('')} px-8 py-0.5 flex items-center justify-between  backdrop-blur-xl `}>
   <Link to={'/'} className="">
   <h1 className=" text-[#ff3e98] mt-3 subpixel-antialiased text-3xl prata-regular outfit-uniquifier tracking-widest">
                     SAVANA
@@ -24,11 +27,11 @@ const UserNavbar = () => {
   <div className="flex w-full py-0 my-0 justify-between items-center">
   <div className="flex w-full justify-end ">
     <ul className="flex  justify-between  text-sm ">
-      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  ' to={'/'}><li><a>Home</a></li></Link>
-      <Link className='mx-12 hover:bg-base-300 px-4 pt-1 ' to={'/wall'}><li><a>Wall</a></li></Link>
-      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  ' to={'/chat'}><li className='indicator'><a>Matches :<span className="zain-regular mx-1  backdrop-blur-md px-2 pt-0.5 rounded-xl">{matches?.length}</span></a></li></Link>
-      <Link className='mx-12 hover:bg-base-300 px-4 pt-1  ' to={'/notifications'}><li className='indicator'><a>Notifications :
-      <span className="zain-regular mx-1 backdrop-blur-md px-1 pt-0.5 r">7</span></a></li></Link>
+      <Link className='mx-2 hover:bg-base-300 transition duration-900 hover:shadow-xl rounded-xl px-4 pt-1  ' to={'/'}><li><a>Home</a></li></Link>
+      <Link className='mx-2 hover:bg-base-300 transition duration-900  hover:shadow-xl rounded-xl px-4 pt-1 ' to={'/wall'}><li><a>Wall</a></li></Link>
+      <Link className='mx-2 hover:bg-base-300 transition duration-900 hover:shadow-xl rounded-xl px-4 pt-1  ' to={'/chat'}><li className='indicator'><a>Matches :<span className="zain-regular ml-1  backdrop-blur-md px-1 pt-0.5 rounded-xl">{matches?.length}</span></a></li></Link>
+      <Link className='mx-2 hover:bg-base-300 transition duration-900 hover:shadow-xl rounded-xl px-4 pt-1  ' to={'/notifications'}><li className='indicator'><a>Notifications :
+      <span className="zain-regular ml-1 backdrop-blur-md px-1 pt-0.5 r">{unReadCount}</span></a></li></Link>
 
      
     </ul>

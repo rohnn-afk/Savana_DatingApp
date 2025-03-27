@@ -33,7 +33,7 @@ const Navbar = () => {
       }`}
     >
       <Link to="home" smooth={true} duration={500} className="logo cursor-pointer">
-        <h1 className="text-rose-400 subpixel-antialiased text-5xl prata-regular outfit-uniquifier tracking-widest">
+        <h1 className="text-[#E50046] subpixel-antialiased text-5xl prata-regular outfit-uniquifier tracking-widest">
           SAVANA
         </h1>
       </Link>

@@ -82,6 +82,9 @@ app.use('/api/user',UserRouter)
 app.use('/api/match',MatchingRoutes)
 app.use('/api/messages',ChatRoute)
 
+
+
+
 export const getUserSocketID = (userID) =>{
 
   return onlineUsers[userID]
@@ -101,23 +104,11 @@ io.on('connection',async (socket)=>{
   io.emit('onlineUsers',Object.keys(onlineUsers))
 
 
-  const missedNotifications = await NotificationModel.find({recieverID:userID,isRead:false})
-
-  if(missedNotifications){
-    missedNotifications.forEach((notification) => {
-      
-      io.to(socket.id).emit('matchnotification',{message:notification.message,userID:senderID})
-
-    });
-
-    await NotificationModel.updateMany({ recieverID: userID, isRead: false }, { isRead: true })
-  }
-
-
   socket.on('disconnect',()=>{
   
     delete onlineUsers[userID]
     io.emit('onlineUsers',Object.keys(onlineUsers))
+
   
     console.log('user disconnected',socket.id)
   })

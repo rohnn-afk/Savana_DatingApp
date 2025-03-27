@@ -2,6 +2,7 @@ import {create} from "zustand"
 import { axiosInstance } from "../lib/axios"
 import toast from "react-hot-toast"
 import {io} from 'socket.io-client'
+import { NotificationStore } from "./NotificationStore"
 
 const BASE_URL= 'https://savana-datingapp-backend.onrender.com/'
 // 'https://savana-datingapp-backend.onrender.com/'
@@ -26,6 +27,8 @@ checkAuth : async ()=>{
             set({authuser:res.data.user})
             toast.success('User Logged-in')
             get().connectSocket()
+            NotificationStore.getState().subscribetoNotification()
+            NotificationStore.getState().fetchNotification()
         }
     } catch (error) {
        toast.error(error.response.data.message)
@@ -103,7 +106,9 @@ updateUserImage : async (data)=>{
     set({isUpdatingUser:false})
     }
 },
+
 connectSocket : ()=>{
+
     const {authuser} = get()
 
     if(!authuser || get().socket?.connected)  return
@@ -118,7 +123,10 @@ connectSocket : ()=>{
     socket.on('onlineUsers',(userIDs)=>{
         set({onlineUsers:userIDs})
     })
+
+
 },
+
 disconnectSocket : ()=>{
     if(get().socket?.connected) get().socket.disconnect()
 }

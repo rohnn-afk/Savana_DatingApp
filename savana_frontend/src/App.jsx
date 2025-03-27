@@ -28,7 +28,7 @@ import POV from "./Pages/UserPages/POV";
 import Preferences from "./Pages/UserPages/Preferences";
 import Pictures from "./Pages/UserPages/Pictures";
 import Notifications from "./Pages/UserPages/Notifications";
-import Wall from "./Pages/WebPages/Wall";
+import Wall from "./Pages/UserPages/Wall";
 import {motion } from 'framer-motion'
 import Journey from "./Pages/WebPages/Journey";
 
@@ -62,6 +62,39 @@ function App() {
     fetchData()
 
   }, [checkAuth,fetchData])
+
+
+  const [isScreenSupported, setIsScreenSupported] = useState(true);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth;
+      setIsScreenSupported(width >= 786); // Only checking width now
+    };
+
+    checkScreenSize(); // Initial check on load
+    window.addEventListener("resize", checkScreenSize); // Listen for window resize
+
+    return () => {
+      window.removeEventListener("resize", checkScreenSize); // Cleanup listener
+    };
+  }, []);
+
+  if (!isScreenSupported) {
+    return (
+      <div className="bg-zinc-700 text-white" style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        textAlign: "center",
+        fontSize: "1.2rem",
+        padding: "20px",
+      }}>
+        <p>Current screen size is not supported.<br/>Minimum resolution required: <strong>786 × 769</strong></p>
+      </div>
+    );
+  }
 
 
  
@@ -116,7 +149,7 @@ function App() {
              <div className="w-full flex  flex-col items-center justify-center h-full z-[999]  bg-zinc-400/10">
 
             <Journey/>
-            <button className="bg-black text-white rounded-md py-2 px-8 mt-1 w-[80vw] hover:bg-zinc-100 hover:text-rose-500  " onClick={()=>setshowJourney()}>Take me home</button>
+            <button className="bg-black text-white rounded-md py-2 px-8 mt-1 w-[96vw] hover:text-rose-500  " onClick={()=>setshowJourney()}>Take me home</button>
 
         </div>
              
@@ -124,7 +157,7 @@ function App() {
            </motion.div>
          
            }
-         <div className={`relative w-full min-h-screen bg-gradient-to-br from-pink-900 via-black  to-zinc-100  text-white ${showSplash ? "overflow-hidden" : ""} `}>
+         <div className={`relative w-full min-h-screen bg-gradient-to-br from-[#DDEB9D] via-[#E50046] to-[#FBF8EF]  text-white ${showSplash ? "overflow-hidden" : ""} `}>
          
           {showSplash && (
                           <div className="fixed inset-0 flex items-center justify-center backdrop-blur-md bg-black/50 z-999">
@@ -136,11 +169,11 @@ function App() {
 
         <div id='home'>
         <Home />
-        <Marquee color={"bg-rose-400"} text={"we are SAVANA ."} />
+        <Marquee color={"bg-[#E50046]"} text={"we are SAVANA ."} />
         </div>
 
 
-        <div className="border-b-2 z-[1]  border-rose-300 bg-gradient-to-br from-black via-[#004D40] to-black" id='about'>
+        <div className="border-b-2 z-[1]  border-rose-300 bg-gradient-to-br from-[#E50046] via-[#004D40] to-black" id='about'>
         <MovingLine2 color={'green'} index={'-20'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
         <MovingLine2 color={'green'} index={'-20'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
         <MovingLine2 color={'green'} index={'-20'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>

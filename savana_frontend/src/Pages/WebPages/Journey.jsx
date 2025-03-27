@@ -3,7 +3,7 @@ import FloatingPhn from '../../Componentes/UI/FloatingPhn'
 const Journey = () => {
   return (
     <div>
-      <div className='w-[96vw] mb-2 h-[88vh]  bg-zinc-900 flex flex-row rounded-lg justify-between p-10 items-center'>
+      <div className='w-[96vw] mb-2 h-[88vh]  bg-zinc-900 flex flex-row rounded-sm justify-between p-10 items-center'>
               
              
       <div className='w-1/2 h-full flex items-center justify-center'>

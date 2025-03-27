@@ -1,6 +1,7 @@
 import express from 'express'
 import { fetchMatches, getMessages, sendMessages } from '../Controllers/Matches.js'
 import { UserAuth } from '../Middleware/AuthUser.js'
+import { fetchNotification } from '../Controllers/Notifications.js'
 
 const ChatRoute = express.Router()
 
@@ -11,8 +12,5 @@ ChatRoute.post('/',(req,res)=>{
 ChatRoute.post('/allmatches',UserAuth,fetchMatches)
 ChatRoute.post('/:id',UserAuth,getMessages)
 ChatRoute.post('/send/:id',UserAuth,sendMessages)
-
-
-
 
 export default ChatRoute

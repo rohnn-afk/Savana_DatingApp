@@ -183,138 +183,283 @@ const Pictures = () => {
 
     <div className=" w-7/8 rounded-lg flex py-10 px- pr-28 gap-3 flex-col">
 
-    <label htmlFor="image1" className="p-2 px-4 flex items-center justify-between cursor-pointer transition-transform duration-300  hover:scale-110" >
-              <div  className={` rounded-full cursor-pointer   transition-all duration-200  bg-white `}  >
-               { image1 ? (<img className="w-10 h-10 object-cover rounded-3xl" src={URL.createObjectURL(image1)}/>) : 
-               (
-                  (userImages.image1?.image && <img className="w-10 h-10 object-cover rounded-3xl" src={userImages.image1?.image}/>) || <Camera className="w-5 h-5 m-2" />
-               )}
-                <input
-                  type="file"
-                  id="image1"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={(e)=>setImage1(e.target.files[0])}
-                  disabled={updatingimages}
-                  />
-              </div>
-              <p>Image - 1</p>
-              {!userImages.image1?.image ? (image1 ? (<CheckCircle className="text-green-500" size={22}/>) : (<IconMoodEmpty size={22} className="text-red-500"/>)) : 
-              (<CheckCircle className="text-green-500" size={22}/>)}
-              <button onClick={()=>setActiveTitle(activeTitle == 'title1' ? null : 'title1')} className="px-6 hover:text-rose-700">{title1data ? (<Pen size={18} className="text-green-500"/> ) : (<Pen size={18}/>)}</button>
-    </label>
+    <label
+        htmlFor="image1"
+        className="p-2 px-4 flex items-center justify-between cursor-pointer transition-transform duration-300 hover:scale-105  rounded-lg  shadow-md w-full max-w-lg mx-auto"
+      >
+        <div className="rounded-full transition-all duration-200 bg-white flex items-center justify-center w-12 h-12 overflow-hidden">
+          {image1 ? (
+            <img
+              className="w-full h-full object-cover rounded-full"
+              src={URL.createObjectURL(image1)}
+              alt="Uploaded"
+            />
+          ) : (
+            userImages.image1?.image ? (
+              <img
+                className="w-full h-full object-cover rounded-full"
+                src={userImages.image1?.image}
+                alt="User uploaded"
+              />
+            ) : (
+              <Camera className="w-5 h-5 text-gray-500" />
+            )
+          )}
+          <input
+            type="file"
+            id="image1"
+            className="hidden"
+            accept="image/*"
+            onChange={(e) => setImage1(e.target.files[0])}
+            disabled={updatingimages}
+          />
+        </div>
+        <p className="text-sm md:text-base">Image - 1</p>
+        {userImages.image1?.image || image1 ? (
+          <CheckCircle className="text-green-500" size={22} />
+        ) : (
+          <IconMoodEmpty size={22} className="text-red-500" />
+        )}
+        <button
+          onClick={() => setActiveTitle(activeTitle === 'title1' ? null : 'title1')}
+          className="px-4 hover:text-rose-700"
+        >
+          {title1data ? <Pen size={18} className="text-green-500" /> : <Pen size={18} />}
+        </button>
+      </label>
 
-    <label htmlFor="image2" className="p-2 px-4 flex items-center justify-between cursor-pointer transition-transform duration-300  hover:scale-110" >
-              <div  className={` rounded-full cursor-pointer   transition-all duration-200  bg-white `}  >
-               { image2 ? (<img className="w-10 h-10 object-cover rounded-3xl" src={URL.createObjectURL(image2)}/>) : 
-               (
-                (userImages.image2?.image && <img className="w-10 h-10 object-cover rounded-3xl" src={userImages.image2?.image}/>) || <Camera className="w-5 h-5 m-2" />
-              )}
-                <input
-                  type="file"
-                  id="image2"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={(e)=>setImage2(e.target.files[0])}
-                  disabled={updatingimages}
-                  />
-              </div>
-              <p>Image - 2</p>
-              {!userImages.image2?.image ? (image2 ? (<CheckCircle className="text-green-500" size={22}/>) : (<IconMoodEmpty size={22} className="text-red-500"/>)) : 
-              (<CheckCircle className="text-green-500" size={22}/>)}
-              <button onClick={()=>setActiveTitle(activeTitle == 'title2' ? null : 'title2')} className="px-6 hover:text-rose-700">{title2data ? (<Pen size={18} className="text-green-500"/> ) : (<Pen size={18}/>)}</button>
-    </label>
+      <label
+        htmlFor="image2"
+        className="p-2 px-4 flex items-center justify-between cursor-pointer transition-transform duration-300 hover:scale-105  rounded-lg  shadow-md w-full max-w-lg mx-auto"
+      >
+        <div className="rounded-full transition-all duration-200 bg-white flex items-center justify-center w-12 h-12 overflow-hidden">
+          {image2 ? (
+            <img
+              className="w-full h-full object-cover rounded-full"
+              src={URL.createObjectURL(image2)}
+              alt="Uploaded"
+            />
+          ) : (
+            userImages.image2?.image ? (
+              <img
+                className="w-full h-full object-cover rounded-full"
+                src={userImages.image2?.image}
+                alt="User uploaded"
+              />
+            ) : (
+              <Camera className="w-5 h-5 text-gray-500" />
+            )
+          )}
+          <input
+            type="file"
+            id="image2"
+            className="hidden"
+            accept="image/*"
+            onChange={(e) => setImage2(e.target.files[0])}
+            disabled={updatingimages}
+          />
+        </div>
+        <p className="text-sm md:text-base">Image - 2</p>
+        {userImages.image2?.image || image2 ? (
+          <CheckCircle className="text-green-500" size={22} />
+        ) : (
+          <IconMoodEmpty size={22} className="text-red-500" />
+        )}
+        <button
+          onClick={() => setActiveTitle(activeTitle === 'title2' ? null : 'title2')}
+          className="px-4 hover:text-rose-700"
+        >
+          {title2data ? <Pen size={18} className="text-green-500" /> : <Pen size={18} />}
+        </button>
+      </label>
 
-    <label htmlFor="image3" className="p-2 px-4 flex items-center justify-between cursor-pointer transition-transform duration-300  hover:scale-110" >
-              <div  className={` rounded-full cursor-pointer   transition-all duration-200  bg-white `}  >
-               { image3 ? (<img className="w-10 h-10 object-cover rounded-3xl" src={URL.createObjectURL(image3)}/>) : 
-               (
-                (userImages.image3?.image && <img className="w-10 h-10 object-cover rounded-3xl" src={userImages.image3?.image}/>) || <Camera className="w-5 h-5 m-2" />
-              )}
-                <input
-                  type="file"
-                  id="image3"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={(e)=>setImage3(e.target.files[0])}
-                  disabled={updatingimages}
-                  />
-              </div>
-              <p>Image - 3</p>
-              {!userImages.image3?.image ? (image3 ? (<CheckCircle className="text-green-500" size={22}/>) : (<IconMoodEmpty size={22} className="text-red-500"/>)) : 
-              (<CheckCircle className="text-green-500" size={22}/>)}
-              <button onClick={()=>setActiveTitle(activeTitle == 'title3' ? null : 'title3')} className="px-6 hover:text-rose-700">{title3data ? (<Pen size={18} className="text-green-500"/> ) : (<Pen size={18}/>)}</button>
-    </label>
+      <label
+        htmlFor="image3"
+        className="p-2 px-4 flex items-center justify-between cursor-pointer transition-transform duration-300 hover:scale-105  rounded-lg  shadow-md w-full max-w-lg mx-auto"
+      >
+        <div className="rounded-full transition-all duration-200 bg-white flex items-center justify-center w-12 h-12 overflow-hidden">
+          {image3 ? (
+            <img
+              className="w-full h-full object-cover rounded-full"
+              src={URL.createObjectURL(image3)}
+              alt="Uploaded"
+            />
+          ) : (
+            userImages.image3?.image ? (
+              <img
+                className="w-full h-full object-cover rounded-full"
+                src={userImages.image3?.image}
+                alt="User uploaded"
+              />
+            ) : (
+              <Camera className="w-5 h-5 text-gray-500" />
+            )
+          )}
+          <input
+            type="file"
+            id="image3"
+            className="hidden"
+            accept="image/*"
+            onChange={(e) => setImage3(e.target.files[0])}
+            disabled={updatingimages}
+          />
+        </div>
+        <p className="text-sm md:text-base">Image - 3</p>
+        {userImages.image3?.image || image3 ? (
+          <CheckCircle className="text-green-500" size={22} />
+        ) : (
+          <IconMoodEmpty size={22} className="text-red-500" />
+        )}
+        <button
+          onClick={() => setActiveTitle(activeTitle === 'title3' ? null : 'title3')}
+          className="px-4 hover:text-rose-700"
+        >
+          {title3data ? <Pen size={18} className="text-green-500" /> : <Pen size={18} />}
+        </button>
+        </label>
 
-    <label htmlFor="image4" className="p-2 px-4 flex items-center justify-between cursor-pointer transition-transform duration-300  hover:scale-110" >
-              <div  className={` rounded-full cursor-pointer   transition-all duration-200  bg-white `}  >
-               { image4 ? (<img className="w-10 h-10 object-cover rounded-3xl" src={URL.createObjectURL(image4)}/>) : 
-               (
-                (userImages.image4?.image && <img className="w-10 h-10 object-cover rounded-3xl" src={userImages.image4?.image}/>) || <Camera className="w-5 h-5 m-2" />
-              )}
-                <input
-                  type="file"
-                  id="image4"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={(e)=>setImage4(e.target.files[0])}
-                  disabled={updatingimages}
-                  />
-              </div>
-              <p>Image - 4</p>
-              {!userImages.image4?.image ? (image4 ? (<CheckCircle className="text-green-500" size={22}/>) : (<IconMoodEmpty size={22} className="text-red-500"/>)) : 
-              (<CheckCircle className="text-green-500" size={22}/>)}
-              <button onClick={()=>setActiveTitle(activeTitle == 'title4' ? null : 'title4')} className="px-6 hover:text-rose-700">{title4data ? (<Pen size={18} className="text-green-500"/> ) : (<Pen size={18}/>)}</button>
-    </label>
 
-    <label htmlFor="image5" className="p-2 px-4 flex items-center justify-between cursor-pointer transition-transform duration-300  hover:scale-110" >
-              <div  className={` rounded-full cursor-pointer   transition-all duration-200  bg-white `}  >
-               { image5 ? (<img className="w-10 h-10 object-cover rounded-3xl" src={URL.createObjectURL(image5)}/>) : 
-               (
-                (userImages.image5?.image && <img className="w-10 h-10 object-cover rounded-3xl" src={userImages.image5?.image}/>) || <Camera className="w-5 h-5 m-2" />
-              )}
-                <input
-                  type="file"
-                  id="image5"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={(e)=>setImage5(e.target.files[0])}
-                  disabled={updatingimages}
-                  />
-              </div>
-              <p>Image - 5</p>
-              {!userImages.image5?.image ? (image5 ? (<CheckCircle className="text-green-500" size={22}/>) : (<IconMoodEmpty size={22} className="text-red-500"/>)) : 
-              (<CheckCircle className="text-green-500" size={22}/>)}
-              <button onClick={()=>setActiveTitle(activeTitle == 'title5' ? null : 'title5')} className="px-6 hover:text-rose-700">{title5data ? (<Pen size={18} className="text-green-500"/> ) : (<Pen size={18}/>)}</button>
-    </label>
+        <label
+        htmlFor="image4"
+        className="p-2 px-4 flex items-center justify-between cursor-pointer transition-transform duration-300 hover:scale-105  rounded-lg  shadow-md w-full max-w-lg mx-auto"
+      >
+        <div className="rounded-full transition-all duration-200 bg-white flex items-center justify-center w-12 h-12 overflow-hidden">
+          {image4 ? (
+            <img
+              className="w-full h-full object-cover rounded-full"
+              src={URL.createObjectURL(image4)}
+              alt="Uploaded"
+            />
+          ) : (
+            userImages.image4?.image ? (
+              <img
+                className="w-full h-full object-cover rounded-full"
+                src={userImages.image4?.image}
+                alt="User uploaded"
+              />
+            ) : (
+              <Camera className="w-5 h-5 text-gray-500" />
+            )
+          )}
+          <input
+            type="file"
+            id="image4"
+            className="hidden"
+            accept="image/*"
+            onChange={(e) => setImage4(e.target.files[0])}
+            disabled={updatingimages}
+          />
+        </div>
+        <p className="text-sm md:text-base">Image - 4</p>
+        {userImages.image4?.image || image4 ? (
+          <CheckCircle className="text-green-500" size={22} />
+        ) : (
+          <IconMoodEmpty size={22} className="text-red-500" />
+        )}
+        <button
+          onClick={() => setActiveTitle(activeTitle === 'title4' ? null : 'title4')}
+          className="px-4 hover:text-rose-700"
+        >
+          {title4data ? <Pen size={18} className="text-green-500" /> : <Pen size={18} />}
+        </button>
+      </label>
+
+      <label
+        htmlFor="image5"
+        className="p-2 px-4 flex items-center justify-between cursor-pointer transition-transform duration-300 hover:scale-105  rounded-lg  shadow-md w-full max-w-lg mx-auto"
+      >
+        <div className="rounded-full transition-all duration-200 bg-white flex items-center justify-center w-12 h-12 overflow-hidden">
+          {image5 ? (
+            <img
+              className="w-full h-full object-cover rounded-full"
+              src={URL.createObjectURL(image5)}
+              alt="Uploaded"
+            />
+          ) : (
+            userImages.image5?.image ? (
+              <img
+                className="w-full h-full object-cover rounded-full"
+                src={userImages.image5?.image}
+                alt="User uploaded"
+              />
+            ) : (
+              <Camera className="w-5 h-5 text-gray-500" />
+            )
+          )}
+          <input
+            type="file"
+            id="image5"
+            className="hidden"
+            accept="image/*"
+            onChange={(e) => setImage5(e.target.files[0])}
+            disabled={updatingimages}
+          />
+        </div>
+        <p className="text-sm md:text-base">Image - 5</p>
+        {userImages.image5?.image || image5 ? (
+          <CheckCircle className="text-green-500" size={22} />
+        ) : (
+          <IconMoodEmpty size={22} className="text-red-500" />
+        )}
+        <button
+          onClick={() => setActiveTitle(activeTitle === 'title5' ? null : 'title5')}
+          className="px-4 hover:text-rose-700"
+        >
+          {title5data ? <Pen size={18} className="text-green-500" /> : <Pen size={18} />}
+        </button>
+      </label>
     
 
-    <label htmlFor="image6" className="p-2 px-4 flex items-center justify-between cursor-pointer transition-transform duration-300  hover:scale-110" >
-              <div  className={` rounded-full cursor-pointer   transition-all duration-200  bg-white `}  >
-               { image6 ? (<img className="w-10 h-10 object-cover rounded-3xl" src={URL.createObjectURL(image6)}/>) : 
-               (
-                 ( userImages.image6?.image && <img className="w-10 h-10 object-cover rounded-3xl" src={userImages.image6?.image}/>) || <Camera className="w-5 h-5 m-2" />
-              )}
-                <input
-                  type="file"
-                  id="image6"
-                  className="hidden"
-                  accept="image/*"
-                  onChange={(e)=>setImage6(e.target.files[0])}
-                  disabled={updatingimages}
-                  />
-              </div>
-              <p>Image - 6</p>
-              {!userImages.image6?.image ? (image6 ? (<CheckCircle className="text-green-500" size={22}/>) : (<IconMoodEmpty size={22} className="text-red-500"/>)) : 
-              (<CheckCircle className="text-green-500" size={22}/>)}
-              <button onClick={()=>setActiveTitle(activeTitle == 'title6' ? null : 'title6')} className="px-6 hover:text-rose-700">{title6data ? (<Pen size={18} className="text-green-500"/> ) : (<Pen size={18}/>)}</button>
-    </label>
+      <label
+        htmlFor="image6"
+        className="p-2 px-4 flex items-center justify-between cursor-pointer transition-transform duration-300 hover:scale-105  rounded-lg  shadow-md w-full max-w-lg mx-auto"
+      >
+        <div className="rounded-full transition-all duration-200 bg-white flex items-center justify-center w-12 h-12 overflow-hidden">
+          {image6 ? (
+            <img
+              className="w-full h-full object-cover rounded-full"
+              src={URL.createObjectURL(image6)}
+              alt="Uploaded"
+            />
+          ) : (
+            userImages.image6?.image ? (
+              <img
+                className="w-full h-full object-cover rounded-full"
+                src={userImages.image6?.image}
+                alt="User uploaded"
+              />
+            ) : (
+              <Camera className="w-5 h-5 text-gray-500" />
+            )
+          )}
+          <input
+            type="file"
+            id="image6"
+            className="hidden"
+            accept="image/*"
+            onChange={(e) => setImage6(e.target.files[0])}
+            disabled={updatingimages}
+          />
+        </div>
+        <p className="text-sm md:text-base">Image - 6</p>
+        {userImages.image6?.image || image6 ? (
+          <CheckCircle className="text-green-500" size={22} />
+        ) : (
+          <IconMoodEmpty size={22} className="text-red-500" />
+        )}
+        <button
+          onClick={() => setActiveTitle(activeTitle === 'title6' ? null : 'title6')}
+          className="px-4 hover:text-rose-700"
+        >
+          {title6data ? <Pen size={18} className="text-green-500" /> : <Pen size={18} />}
+        </button>
+      </label>
    
 
 
       
     </div>
-    {updatingimages ? (<div className="w-full bg-base-100 p-2 animate-pulse flex justify-center"> <p>Updating images ...</p> </div>) : null }
+    {updatingimages ? (<div className="w-full bg-base-100 p-2 animate-pulse flex justify-center"> <p>Updating images ...</p> </div>) : (<div className="w-full bg-base-100 py-6 text-green-500 text-xs animate-pulse flex justify-center"> <p>please scroll down ...</p> </div>) }
 
     <div>{titleFunction(activeTitle)}</div>
 

@@ -24,7 +24,7 @@ const Featured = () => {
             </h1>
           </div>
           <div className="p-12 my-20  mb-20 pb-8">
-          <div className="cards  mt-12 ml-20 pr-20 rounded-xl p-7 flex gap-8 w-full mb-10">
+          <div className="cards  mt-16 ml-20 pr-20 rounded-xl p-7 flex gap-8 w-full mb-28">
               <div
                 onMouseEnter={() => setHovering1(true)}
                 onMouseLeave={() => setHovering1(false)}

@@ -34,11 +34,21 @@ export const MatchStore = create((set,get)=>({
         try {
 
             const res = await axiosInstance.post('/match/like',{likeduserID:data?._id})
-            if(res.data.success){
+            if(res.data.success && !res.data.match){
                 toast.success('donelike')
                 set((state)=>({potentialMatch: state.potentialMatch.filter(match=> match._id !== data._id)}))
                 UIStore.getState().removeCheckout()
+                UIStore.getState().setShowHeartstrue()
                 get().getMatches()
+            }
+
+            if(res.data.match){
+                toast.success('Its a Match')
+                set((state)=>({potentialMatch: state.potentialMatch.filter(match=> match._id !== data._id)}))
+                UIStore.getState().removeCheckout()
+                UIStore.getState().setShowConfettitrue()
+                get().getMatches()
+
             }
 
         } catch (error) {
@@ -134,10 +144,6 @@ export const MatchStore = create((set,get)=>({
         const socket = UserAuthStore.getState().socket
 
         socket.off('newmessage')
-
-    },
-
-    subscribeToNotifications : ()=>{
 
     }
 }))

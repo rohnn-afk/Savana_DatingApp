@@ -20,12 +20,12 @@ export const likeUser = async (req,res)=>{
     const user = await BioModel.findOne({userID})
     const likeduser = await BioModel.findOne({_id:likeduserID})
 
+
     if(!user || !likeduser){
         return res.status(404).json({success:false,message:"users not found"})
     }
 
-    const recieverSocketID = await getUserSocketID(likeduserID)
-    const senderSocketID = await getUserSocketID(userID)
+    const recieverSocketID = await getUserSocketID(likeduser.userID)
 
 
     if(!user.likes.includes(likeduserID)){
@@ -42,34 +42,21 @@ export const likeUser = async (req,res)=>{
        
         
         if(recieverSocketID){
-            io.to(recieverSocketID).emit('matchnotification',{message:'its a match',userID})
-        }else{
-            const res = new NotificationModel({
-                    senderID:userID,
-                    recieverID:likeduserID,
-                    type:'MATCH',
-                    message:'You got a Match!',
-                    timestamp: new Date()
-            })
 
-            await res.save()
-
+            io.to(recieverSocketID).emit('matchnotification',{message:'You got a Match',userID})
         }
 
-        if(senderSocketID){
-            io.to(senderSocketID).emit('matchnotification',{message:'its a match',likeduserID})
-        }else{
-            const res = new NotificationModel({
-                    senderID:likeduserID,
-                    recieverID:userID,
-                    type:'MATCH',
-                    message:'You got a Match!',
-                    timestamp: new Date()
+            
+            const response = new NotificationModel({
+                senderID:userID,
+                recieverID:likeduser.userID,
+                type:'MATCH',
+                message:'You got a Match!',
+                timestamp: new Date()
             })
+            
+            await response.save()
 
-            await res.save()
-
-        }
        
         return res.status(202).json({success:true,match:true,message:"users are a match"})
     }
@@ -77,21 +64,19 @@ export const likeUser = async (req,res)=>{
     //notification for like
 
     if(recieverSocketID){
-        io.to(recieverSocketID).emit('matchnotification',{message:'Someone liked you',userID})
-    }else{
-        const res = new NotificationModel({
+        console.log(recieverSocketID,'sockedid')
+        io.to(recieverSocketID).emit('likenotification',{message:'Someone liked you',userID})
+    }
+
+        const response = new NotificationModel({
                 senderID:userID,
-                recieverID:likeduserID,
+                recieverID:likeduser.userID,
                 type:'LIKE',
                 message:'You got a Like!',
                 timestamp: new Date()
         })
 
-        await res.save()
-
-    }
-
-
+        await response.save()
 
     return res.status(202).json({success:true,match:false,message:"users have been added to liked"})
 
