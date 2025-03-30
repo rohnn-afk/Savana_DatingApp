@@ -23,6 +23,7 @@ const Insights = () => {
   initial={{ x: "-100vw", opacity: 0 }} // Start from off-screen (left)
   animate={{ x: 0, opacity: 1 }} // Move to its normal position
   transition={{ type: "tween", duration: 0.8, ease: "easeOut", delay:0.5 }}  
+  viewport={{ once: true }} 
 
 className=" w-full flex gap-32 justify-center sm:flex-col md:flex-col lg:flex-row my-4 ">
             <CountUpTimer/>
