@@ -19,14 +19,13 @@ export const NotificationStore = create((set,get)=>({
 
     fetchNotification : async ()=>{
 
-
         set({isNotificationLoading:true}) 
         try {
             const response = await axiosInstance.post('/match/notification',{})
             set({notifications:response.data.notifications})
 
-            // const unreadCount = get().notifications.filter(n => !n.isRead).length;
-            // set({unReadCount:unreadCount})
+            const unreadCount = get().notifications.filter(n => !n.isRead).length;
+            set({unReadCount:unreadCount})
 
         } catch (error) {
             console.log(error)
@@ -62,13 +61,10 @@ export const NotificationStore = create((set,get)=>({
 
         socket.on('matchnotification',(notification)=>{
             toast.success(notification.message)
-            get().addNotifications(notification)
         })
 
         socket.on('likenotification',(notification)=>{
             toast.success(notification.message)
-            get().addNotifications(notification)
-
         })
 
     },

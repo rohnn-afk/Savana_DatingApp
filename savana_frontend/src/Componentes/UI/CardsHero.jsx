@@ -1,23 +1,47 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { UIStore } from "../../Store/UIStore";
 
 const ShuffleHero = () => {
+
+      const { setUserPage } = UIStore();
+  
+
   return (
     <section className="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-40 max-w-6xl mx-auto">
       <div>
-        <span className="block mb-4 text-xs md:text-sm text-indigo-500 font-medium">
-          Better every day
-        </span>
-        <h3 className="text-4xl md:text-6xl text-zinc-800 font-semibold">
+        <motion.span 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut", delay: 0.2 }}
+            viewport={{ once: true }} 
+        className="block mb-4 text-xs md:text-sm text-indigo-500 font-medium">
+          Tired of same old dating apps ?
+        </motion.span>
+        <motion.h3 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
+            viewport={{ once: true }} 
+        className="text-4xl md:text-6xl text-zinc-800 font-semibold">
           Let's change it up a bit
-        </h3>
-        <p className="text-base md:text-lg text-slate-700 my-4 md:my-6">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam nobis in
-          error repellat voluptatibus ad.
-        </p>
-        <button className="bg-indigo-500 text-white font-medium py-2 px-4 rounded transition-all hover:bg-indigo-600 active:scale-95">
-          Find a class
-        </button>
+        </motion.h3>
+        <motion.p 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut", delay: 0.6 }}
+            viewport={{ once: true }} 
+        className="text-base md:text-lg text-slate-700 my-4 md:my-6">
+         Unlock the ultimate dating experience with our premium features—get unlimited swipes, see who likes you, boost your profile, and enjoy an ad-free journey to finding your perfect match!
+        </motion.p>
+        <motion.button onClick={()=>{setUserPage()}}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut", delay: 0.7 }}
+            viewport={{ once: true }} 
+        className="bg-[#004D40] text-white font-medium py-2 px-4 rounded transition-all hover:bg-indigo-600 active:scale-95">
+          Find a Match
+        </motion.button>
       </div>
       <ShuffleGrid />
     </section>
@@ -140,9 +164,15 @@ const ShuffleGrid = () => {
   };
 
   return (
-    <div className="grid grid-cols-4 grid-rows-4 h-[450px] gap-1">
+    <motion.div
+
+    initial={{ opacity: 0, scale: 0.5 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.2, ease: "easeOut", delay: 0.2 }}
+    viewport={{ once: true }}
+     className="grid grid-cols-4 grid-rows-4 h-[450px] gap-1">
       {squares.map((sq) => sq)}
-    </div>
+    </motion.div>
   );
 };
 

@@ -5,6 +5,7 @@ const notificationSchema = new mongoose.Schema({
     recieverID:{type:mongoose.Schema.Types.ObjectId,ref:'user',require:true},
     type:{type:String,require:true},
     message:{type:String,require:true},
+    senderdata:{type:Object,require:true},
     timestamp:{type:Date,default:Date.now()},
     isRead:{type:Boolean,default:false}
 })

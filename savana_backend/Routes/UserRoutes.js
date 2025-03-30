@@ -1,5 +1,5 @@
 import express from 'express'
-import { checkAuth, createUser, loginUser, logout } from '../Controllers/Login.js'
+import { checkAuth, createUser, fetchLikeCount, loginUser, logout } from '../Controllers/Login.js'
 import { deleteProfile, fetchImages, fetchProfile, updateProfileData, updateProfileImages, updateuserImage } from '../Controllers/Profile.js'
 import { UserAuth } from '../Middleware/AuthUser.js'
 
@@ -21,6 +21,7 @@ UserRouter.post('/deletebio',UserAuth,deleteProfile)
 UserRouter.post('/fetchimages',UserAuth,fetchImages)
 UserRouter.post('/updateimages',UserAuth,updateProfileImages)
 UserRouter.post('/updateuserimage',UserAuth,updateuserImage)
+UserRouter.post('/fetchlikecount',UserAuth,fetchLikeCount)
 
 
 

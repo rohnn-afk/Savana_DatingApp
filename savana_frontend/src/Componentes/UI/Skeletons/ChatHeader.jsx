@@ -23,7 +23,7 @@ const ChatHeader = () => {
 
           {/* User info */}
           <div className=" mx-4 mb-3 flex gap-2 text-2xl">
-            <h3 className="text-3xl font-bold capitalize text-[#16C47F] hover:text-[#a1fff7] leading-none ">{selecteduser?.name}{' '}</h3> :
+            <h3 className="text-3xl font-bold capitalize text-[#0b4f34] hover:text-[#16887f] leading-none ">{selecteduser?.name}{' '}</h3> :
           </div>
         </button>
 

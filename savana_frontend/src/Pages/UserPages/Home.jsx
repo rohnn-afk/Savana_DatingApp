@@ -12,17 +12,16 @@ import Lottie from "lottie-react";
 import { Howl } from "howler";
 import heartAnimation from "../../assets/heart.json.json";
 
-
 const UserHome = () => {
   
   const {checkAuth} = UserAuthStore()
   const {fetchData} = ProfileStore()
-  const {FindingPotentialMatch,potentialMatch, likePotentialMatch,getMatches} = MatchStore()
-  const {selectedPotentialMatch,removeCheckout,selectedPotentialMatchImages,showConfetti ,showHearts} = UIStore()
+  const {FindingPotentialMatch,potentialMatch, likePotentialMatch,getMatches,matches} = MatchStore()
+  const {selectedPotentialMatch,removeCheckout,selectedPotentialMatchImages,showConfetti ,showHearts,likeCount} = UIStore()
+
 
   
-  
-  const likeSound = new Howl({ src: ["/791346__loshid__pop-up.m4a"], volume: 1});
+  const likeSound = new Howl({ src: ["/791346__loshid__pop-up.m4a"], volume: 0.4});
 
 
   const handleLike = () => {
@@ -55,7 +54,7 @@ const UserHome = () => {
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1.2 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.1, ease: "easeOut" }}
         >
           <Lottie animationData={heartAnimation} style={{ width: 100, height: 145 }} />
         </motion.div>
@@ -63,7 +62,7 @@ const UserHome = () => {
 
 
   {!potentialMatch ? (
-    <div className="w-full h-[60vh] bg-base-300 flex items-center justify-center text-center px-4">
+    <div className="w-full h-[60vh] mt-20 bg-base-300 flex items-center justify-center text-center px-4">
       <p>Please, go to profile, enter your details for Savana to show you your preference profiles</p>
     </div>
   ) : potentialMatch.length === 0 ? (
@@ -80,12 +79,15 @@ const UserHome = () => {
   
     { selectedPotentialMatch   &&
 
-<div className="mx-4 md:mx-10 p-10 md:p-28 bg-base-200 rounded-lg min-h-screen shadow-[0_10px_30px_rgba(0,0,0,0.6)]">
+<div className="mx-4 md:mx-10 p-10  bg-base-200 rounded-lg min-h-screen mt-10 shadow-[0_10px_30px_rgba(0,0,0,0.6)]">
+<div className='w-full justify-end items-end flex'>
 
+<button onClick={() => {removeCheckout();}} className='text-3xl hover:text-red-500 btn'> x </button>
+</div>
 
-<div className="flex flex-col gap-10 md:gap-28 items-center lg:flex-row">
-  <div className='flex items-center flex-col justify-center lg:mr-12'>
-    <div className='overflow-hidden mx-4 md:mx-16 rounded-2xl'>
+<div className="flex flex-col gap-10 md:px-28 md:py-20  md:gap-28 items-center lg:flex-row">
+  <div className='flex items-center flex-col  justify-center lg:mr-12'>
+    <div className='overflow-hidden mx-4  md:mx-16 rounded-2xl'>
       <div className="carousel rounded-2xl w-full md:w-[26vw] h-[50vh] md:h-[70vh]">
         {selectedPotentialMatchImages && 
           Object.values(selectedPotentialMatchImages)
@@ -98,17 +100,16 @@ const UserHome = () => {
       </div>
     </div>
     <div className='p-2 text-center'>
-      <p className='hover:text-zinc-500/50 cursor-none animate-pulse'>Please swipe the picture from right to left</p>
+      <p className='hover:text-zinc-500/30 text-xs cursor-none animate-pulse'>Please swipe the picture from right to left</p>
     </div>
   </div>
 
   <div className='w-full lg:w-2/3 px-4 md:px-10'>
-    <div className='w-full flex flex-row justify-between items-center'>
+
+
       <h1 className="text-4xl md:text-7xl hkfont pb-5 md:pb-10 leading-none font-bold">
         {selectedPotentialMatch?.name}
       </h1>
-      <button onClick={() => {removeCheckout();}} className='text-2xl hover:text-red-500 btn'>x</button>
-    </div>
     
     <div className="p-1 px-2 newfont flex flex-wrap gap-2 md:gap-4 items-center">
       <p className="text-md">{selectedPotentialMatch?.age}</p>
@@ -162,7 +163,66 @@ const UserHome = () => {
 
       }
 
+      <hr className='h-0.5 w-[88vw] mt-32  bg-red-300'/>
+<div className='w-full my-20 flex items-center justify-center'>
+  <motion.h1 
+     initial={{ opacity: 0, y: 50 }}
+     whileInView={{ opacity: 1, y: 0 }}
+     transition={{ duration: 0.4, ease: "easeOut", delay: 0.1}}
+     viewport={{ once: false }} 
+  className='text-3xl'>You Have : </motion.h1>
+
+</div>
+<div className="w-5/6 mb-20 p-10 flex flex-col justify-between  font-semibold gap-6 py-14 ">
+<motion.div 
+initial={{ opacity: 0, y: 50 }}
+whileInView={{ opacity: 1, y: 0 }}
+transition={{ duration: 0.3, ease: "easeOut", delay: 0.1}}
+viewport={{ once: false }} 
+className="flex min-w-[120px] max-w-[300px] text-base p-3 space-x-6 flex-row chat-bubble-primary rounded-2xl justify-center shadow-xl">
+  <h1>Likes</h1><h1>:</h1> 
+  <h1>{likeCount}</h1> 
+  </motion.div>
+  <motion.div 
+   initial={{ opacity: 0, y: 50 }}
+   whileInView={{ opacity: 1, y: 0 }}
+   transition={{ duration: 0.4, ease: "easeOut", delay: 0.1}}
+   viewport={{ once: false }} 
+  className="flex min-w-[120px] max-w-[300px] text-base p-3 space-x-6 flex-row chat-bubble-secondary rounded-2xl justify-center shadow-xl">
+  <h1>Hearts</h1><h1>:</h1> 
+  <h1>{likeCount} </h1> 
+  </motion.div>
+
+  <motion.div
+   initial={{ opacity: 0, y: 50 }}
+   whileInView={{ opacity: 1, y: 0 }}
+   transition={{ duration: 0.5, ease: "easeOut", delay: 0.1}}
+   viewport={{ once: false }} 
+  className="flex min-w-[120px] max-w-[300px] text-base py-3 space-x-6 justify-center flex-row chat-bubble-accent rounded-2xl  shadow-xl">
+  <h1>Matches</h1><h1>:</h1> 
+  <h1>{matches?.length} </h1> 
+</motion.div>
+</div>
+<hr className='h-0.5 w-[88vw] mb-10  bg-red-300'/>
+
+<div className='w-full p-14 flex mb-32 flex-col'>
+  <div className='w-full flex items-center justify-start px-40'>
+    <motion.h1
+       initial={{ opacity: 0, y: 50 }}
+       whileInView={{ opacity: 1, y: 0 }}
+       transition={{ duration: 0.4, ease: "easeOut", delay: 0.1}}
+       viewport={{ once: false }} 
+     className='text-3xl'>
+      What's New :
+    </motion.h1>
+
+  </div>
+
+
+</div>
+
      
+
      
       <div className='w-full mt-10'>
         <BarPoll/>

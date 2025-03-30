@@ -22,7 +22,7 @@ const Home = () => {
                 <h1 className=' gowun-dodum-regular text-9xl  tracking-tighter'>FEELING BORDED?</h1>
             </div>
             <div className='masker  flex flex-row'>
-                <motion.div initial={{width:0}} animate={{width:'20vw'}} transition={{ease:[0.76, 0, 0.24, 1],duration:2}}  className=' m-2 ml-2 w-[30vw] h-20 bg-[#E73879]'></motion.div>
+                <motion.div initial={{width:0}} animate={{width:'20vw'}} transition={{ease:[0.76, 0, 0.24, 1],duration:2}}  className=' m-2 ml-2 w-[30vw] h-20 bg-[#F5004F]'></motion.div>
                 <h1 className=' gowun-dodum-regular text-8xl tracking-tighter'>MEET NEW PEOPLE</h1>
             </div>
             <div className='masker'>
@@ -32,7 +32,7 @@ const Home = () => {
         <div 
          style={{ borderImage: "linear-gradient(to right, #E50046, #FFFFFF) 1" }}
         className='border-t  flex justify-between items-center text-lg lexend-exa-uniquifier py-2  px-1 pr-10'>
-                {["Relationships / Hookups", "Connect verified people only"].map(
+                {["Relationships / Casuals", "Connect verified people only"].map(
   (item, index) => (
     <motion.div
       key={index}

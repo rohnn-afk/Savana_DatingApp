@@ -144,12 +144,17 @@ function App() {
       {showSplash ? (null):(<Navbar />)}
          
            { showJourney && 
-           <motion.div initial={{ x: "100%", opacity: 0 }}animate={{ x: "0%", opacity: 1 }}exit={{ x: "-100%", opacity: 0 }}transition={{ duration: 1, ease: "easeInOut" }}
+           <motion.div initial={{ x: "100%", opacity: 0 }}animate={{ x: "0%", opacity: 1 }}exit={{ x: "-100%", opacity: 0 }}transition={{ duration: 0.8, ease: "easeInOut" }}
             className=" z-[998] top-0 left-0  fixed backdrop-blur-sm w-full h-[100vh]">
              <div className="w-full flex  flex-col items-center justify-center h-full z-[999]  bg-zinc-400/10">
 
             <Journey/>
-            <button className="bg-black text-white rounded-md py-2 px-8 mt-1 w-[96vw] hover:text-rose-500  " onClick={()=>setshowJourney()}>Take me home</button>
+            <motion.button 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
+            viewport={{ once: true }} 
+            className="bg-zinc-900 text-white rounded-md py-2 px-8 mt-1 w-[46vw] hover:text-rose-500  " onClick={()=>setshowJourney()}>Back</motion.button>
 
         </div>
              
@@ -157,7 +162,7 @@ function App() {
            </motion.div>
          
            }
-         <div className={`relative w-full min-h-screen bg-gradient-to-br from-[#DDEB9D] via-[#E50046] to-[#FBF8EF]  text-white ${showSplash ? "overflow-hidden" : ""} `}>
+         <div className={`relative w-full min-h-screen bg-gradient-to-br from-[#DDEB9D] via-[#E50046] to-[#032234]  text-white ${showSplash ? "overflow-hidden" : ""} `}>
          
           {showSplash && (
                           <div className="fixed inset-0 flex items-center justify-center backdrop-blur-md bg-black/50 z-999">
@@ -173,40 +178,33 @@ function App() {
         </div>
 
 
-        <div className="border-b-2 z-[1]  border-rose-300 bg-gradient-to-br from-[#E50046] via-[#004D40] to-black" id='about'>
-        <MovingLine2 color={'green'} index={'-20'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
-        <MovingLine2 color={'green'} index={'-20'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
-        <MovingLine2 color={'green'} index={'-20'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
-        <MovingLine2 color={'green'} index={'-20'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
-        <MovingLine2 color={'green'} index={'-20'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
-        <MovingLine2 color={'green'} index={'-20'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
-        <MovingLine2 color={'green'} index={'-20'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
+        <div className="border-b-2 z-[1]  border-rose-300 bg-gradient-to-br from-[#004D40] via-[#004D40] to-black" id='about'>
+      
 
         <About  />
-        <div className='flex justify-center pb-40 border-rose-300 rounded-3xl'>
-        <Eyes  />
-        </div>
-        <div>
-   
+        <div className='flex flex-col gap-1  justify-center pb-40 border-[#7D0A0A] rounded-3xl'>
+          <div className="w-full flex items-center justify-center" >
 
+        <Eyes  />
+          </div>
+        </div>
+        <MovingLine2  shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
+       
+
+       
+
+        <div>
      
 
         </div>
         </div>
 
-        <div className=" rounded-3xl  overflow-hidden " id='features'>
-          <MovingLine2 color={'pink'} index={'-10'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
-          <MovingLine2 color={'pink'} index={'-10'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
-          <MovingLine2 color={'pink'} index={'-10'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
-          <MovingLine2 color={'pink'} index={'-10'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
-          <MovingLine2 color={'pink'} index={'-10'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
-          <MovingLine2 color={'pink'} index={'-10'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
-          <MovingLine2 color={'pink'} index={'-10'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
-          <MovingLine2 color={'pink'} index={'-10'} shadow={'[0_0_15px_rgba(255,20,147,0.7)]'}/>
+        <div className=" space-y-48 bg-[#0B192C] z-[-999] overflow-hidden " id='features'>
+         
 
 
         <Featured  />
-        <Marquee color={"bg-green-400"} text={"DELULUU  .  Romance   .  SMASH  .  W-RIZZ   .  SIMP  .  SLIDE  .  DATE   ."} />
+        <Marquee color={"bg-green-500"} text={"DELULUU  .  Romance   .  SMASH  .  W-RIZZ   .  SIMP  .  SLIDE  .  DATE   ."} />
         </div>
 
         <div id='insights'>

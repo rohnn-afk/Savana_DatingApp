@@ -121,3 +121,34 @@ export const logout = async (req,res) =>{
     }
     
 } 
+
+export const fetchLikeCount = async (req,res) =>{
+
+    const userID = req.user._id.toString()
+
+    try {
+
+        if(!userID){
+            return res.status(400).json({success:false,message:'user id not provided'})
+
+        }
+
+        const count = await UserModel.findById(userID)
+
+        if(!count){
+
+            return res.status(400).json({success:false,message:'user dont exist'})
+        }
+
+        return res.status(202).json({success:true,count : count.dailyLikes.count })
+
+    
+        
+    } catch (error) {
+        return res.status(500).json({ success: false, message: "Error while fetching like count", error });
+    
+    }
+
+
+
+}

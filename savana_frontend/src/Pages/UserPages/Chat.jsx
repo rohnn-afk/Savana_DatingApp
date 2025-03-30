@@ -3,7 +3,6 @@ import Sidebar from "../../Componentes/Sidebar"
 import { MatchStore } from "../../Store/MatchStore"
 import NoChatSelected from "../../Componentes/UI/Skeletons/NoChatSelected"
 import ChatContainer from "../../Componentes/ChatContainer"
-import POV from "./POV"
 import { UIStore } from "../../Store/UIStore"
 import MatchProfileData from "../../Componentes/MatchProfileData"
 

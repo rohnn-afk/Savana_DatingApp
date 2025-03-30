@@ -4,11 +4,26 @@ import BioModel from "../Models/UserBio.js"
 import { ChatModel } from "../Models/UserChats.js"
 import ImagesModel from "../Models/UserImages.js"
 import { getUserSocketID ,io } from "../server.js"
+import { DailyLikesChecker } from "./DailyLikesChecker.js"
 
 export const likeUser = async (req,res)=>{
 
     const userID = req.user._id.toString()
     const {likeduserID} = req.body
+
+
+    const userdata = await DailyLikesChecker(userID)
+
+    if(userdata.error){
+        return res.status(404).json({success:false,error:user.error})
+    }
+
+    const MAX_LIKES_PER_DAY = 10
+
+    if(userdata.dailyLikes.count >= MAX_LIKES_PER_DAY){
+
+        return res.status(404).json({success:false,message:'You have reached your daily like limit.'})
+    }
 
     try {
 
@@ -52,10 +67,14 @@ export const likeUser = async (req,res)=>{
                 recieverID:likeduser.userID,
                 type:'MATCH',
                 message:'You got a Match!',
+                senderdata:user,
                 timestamp: new Date()
             })
             
             await response.save()
+
+            userdata.dailyLikes.count += 1
+            await userdata.save()
 
        
         return res.status(202).json({success:true,match:true,message:"users are a match"})
@@ -64,7 +83,6 @@ export const likeUser = async (req,res)=>{
     //notification for like
 
     if(recieverSocketID){
-        console.log(recieverSocketID,'sockedid')
         io.to(recieverSocketID).emit('likenotification',{message:'Someone liked you',userID})
     }
 
@@ -73,10 +91,15 @@ export const likeUser = async (req,res)=>{
                 recieverID:likeduser.userID,
                 type:'LIKE',
                 message:'You got a Like!',
+                senderdata:user,
                 timestamp: new Date()
         })
 
         await response.save()
+
+        userdata.dailyLikes.count += 1
+        await userdata.save()
+
 
     return res.status(202).json({success:true,match:false,message:"users have been added to liked"})
 

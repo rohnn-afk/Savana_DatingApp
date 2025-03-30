@@ -37,7 +37,7 @@ const Navbar = () => {
           SAVANA
         </h1>
       </Link>
-      <div className="links flex gap-[8vw] text-zinc-300 items-center justify-center">
+      <div className="links flex gap-[8vw] text-white items-center justify-center">
         <Link to="services" smooth={true} duration={900} className="text-sm group relative cursor-pointer lexend-exa-uniquifier capitalize font-semibold">
           Services
           <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>

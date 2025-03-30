@@ -9,6 +9,7 @@ export const UIStore = create((set,get)=>({
     fetching:false,
     selectedPotentialMatch : null,
     selectedPotentialMatchImages:null,
+    likeCount: 0 ,
 
     theme : (localStorage.getItem('chat-theme'))  || "sunset",
     
@@ -77,8 +78,15 @@ export const UIStore = create((set,get)=>({
         set({showHearts:true})
         setTimeout(() => {set({showHearts:false}) }, 6000);
     },
-  
-  
+
+    fetchLikeCount : async ()=>{
+
+
+        const res = await axiosInstance.post('/user/fetchlikecount',{})
+
+        set({likeCount: 10 - res.data.count })
+
+    }
 
 
 }))

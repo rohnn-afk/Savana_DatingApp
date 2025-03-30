@@ -3,6 +3,7 @@ import { axiosInstance } from "../lib/axios"
 import toast from "react-hot-toast"
 import {io} from 'socket.io-client'
 import { NotificationStore } from "./NotificationStore"
+import { UIStore } from "./UIStore"
 
 const BASE_URL= 'https://savana-datingapp-backend.onrender.com/'
 // 'https://savana-datingapp-backend.onrender.com/'
@@ -29,6 +30,8 @@ checkAuth : async ()=>{
             get().connectSocket()
             NotificationStore.getState().subscribetoNotification()
             NotificationStore.getState().fetchNotification()
+            UIStore.getState().fetchLikeCount()
+            
         }
     } catch (error) {
        toast.error(error.response.data.message)
@@ -47,6 +50,9 @@ signup : async(data)=>{
             set({authuser:res.data.user})
             toast.success('user created successfully')
             get().connectSocket()
+            NotificationStore.getState().subscribetoNotification()
+            NotificationStore.getState().fetchNotification()
+
         }
     } catch (error) {
         toast.error(error.response.data.message)
@@ -65,6 +71,8 @@ login : async(data)=>{
             set({authuser:res.data.user})
             toast.success('Login successfull')
             get().connectSocket()
+            NotificationStore.getState().subscribetoNotification()
+            NotificationStore.getState().fetchNotification()
         }
     } catch (error) {
         console.log(error)

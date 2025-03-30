@@ -5,9 +5,9 @@ const Banner = () => {
 
 
   return (
-    <div >
+    <div className=" bg-gradient-to-br from-black via-[#004D40] to-[#2DAA9E]" >
       <div className="w-full flex bg-red-800 items-center justify-center">
-      <h1 className="text-zinc-900 text-bold text-[40px] pt-1  subpixel-antialiased prata-regular outfit-uniquifier tracking-widest">SAVANA</h1>
+      <h1 className="text-zinc-900 text-bold text-[2.6rem] pt-2  subpixel-antialiased prata-regular outfit-uniquifier tracking-widest">SAVANA</h1>
       </div>
       <AnimatePresence>
 

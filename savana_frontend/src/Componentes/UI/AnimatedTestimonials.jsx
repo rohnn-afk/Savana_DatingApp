@@ -42,7 +42,12 @@ export const AnimatedTestimonials = ({
 
 
         <div>
-          <div className="relative h-[60vh] w-[24vw]">
+          <motion.div 
+           initial={{ opacity: 0, scale: 0.5 }}
+           whileInView={{ opacity: 1, scale: 1 }}
+           transition={{ duration: 0.2, ease: "easeOut", delay: 0.2 }}
+           viewport={{ once: true }}
+          className="relative h-[60vh] w-[24vw]">
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
                 <motion.div
@@ -84,7 +89,7 @@ export const AnimatedTestimonials = ({
                 </motion.div>
               ))}
             </AnimatePresence>
-          </div>
+          </motion.div>
         </div>
         <div className="flex justify-between flex-col rounded-2xl shadow-2xl bg-blue-100 p-12 py-8">
           <motion.div

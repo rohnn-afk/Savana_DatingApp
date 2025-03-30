@@ -1,7 +1,6 @@
 import express from 'express'
 import { fetchMatches, getMessages, sendMessages } from '../Controllers/Matches.js'
 import { UserAuth } from '../Middleware/AuthUser.js'
-import { fetchNotification } from '../Controllers/Notifications.js'
 
 const ChatRoute = express.Router()
 

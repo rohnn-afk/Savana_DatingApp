@@ -3,6 +3,7 @@ import { axiosInstance } from '../lib/axios'
 import toast from 'react-hot-toast'
 import { UserAuthStore } from './UserAuth'
 import { UIStore } from './UIStore'
+import { ProfileStore } from './ProfileStore'
 
 export const MatchStore = create((set,get)=>({
 
@@ -34,12 +35,15 @@ export const MatchStore = create((set,get)=>({
         try {
 
             const res = await axiosInstance.post('/match/like',{likeduserID:data?._id})
+
+
             if(res.data.success && !res.data.match){
                 toast.success('donelike')
                 set((state)=>({potentialMatch: state.potentialMatch.filter(match=> match._id !== data._id)}))
                 UIStore.getState().removeCheckout()
                 UIStore.getState().setShowHeartstrue()
                 get().getMatches()
+                UIStore.getState().fetchLikeCount()
             }
 
             if(res.data.match){
@@ -48,12 +52,14 @@ export const MatchStore = create((set,get)=>({
                 UIStore.getState().removeCheckout()
                 UIStore.getState().setShowConfettitrue()
                 get().getMatches()
+                UIStore.getState().fetchLikeCount(ProfileStore.getState().userData.userID)
+
 
             }
 
         } catch (error) {
             console.log(error)
-            toast.error('couldnt find matches at the moment')
+            toast.error(error.response.data.message)
         }
     },
     getMatches : async()=>{
@@ -63,6 +69,7 @@ export const MatchStore = create((set,get)=>({
             const res = await axiosInstance.post('/messages/allmatches',{})
             if(res.data.success){
                 set({matches:res.data.matches})
+
             }
             
         } catch (error) {

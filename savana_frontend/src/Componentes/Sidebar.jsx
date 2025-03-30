@@ -15,7 +15,7 @@ const Sidebar = () => {
       const [showOnlineOnly,setShowOnlineOnly]= useState(false)
     
 
-    const filteredUsers = showOnlineOnly ? matches?.filter((user) => onlineUsers?.includes(user?._id)) : matches;
+    const filteredUsers = showOnlineOnly ? matches?.filter((user) => {onlineUsers?.includes(user?.userID)}) : matches;
     
 
     if(isMatchesLoading) return <SidebarSkeleton/>
@@ -42,7 +42,8 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className="overflow-y-auto w-full py-3">
+      <div className="overflow-y-auto w-full scrollbar-hidden py-3"
+       onWheel={(e) => e.stopPropagation()} >
         {filteredUsers.map((user) => (
           <button
             key={user?._id}
