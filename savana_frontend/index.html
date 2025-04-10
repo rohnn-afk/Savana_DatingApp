@@ -1,6 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script src="http://localhost:5000/analytics.js" defer></script>
+<script defer>
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.Analytics) {
+      window.Analytics.init('3338cc438716f48076bd2783dcf1735f');
+    } else {
+      console.error('Analytics SDK not loaded.');
+    }
+  });
+</script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

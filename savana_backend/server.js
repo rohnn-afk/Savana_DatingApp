@@ -10,7 +10,6 @@ import MatchingRoutes from './Routes/MatchingRoutes.js'
 import ChatRoute from './Routes/ChatRoutes.js'
 import http from 'http'
 import { Server } from 'socket.io'
-import { NotificationModel } from './Models/NotificationModel.js'
 
 
 // {dot env}
